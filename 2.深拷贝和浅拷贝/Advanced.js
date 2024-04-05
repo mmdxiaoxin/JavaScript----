@@ -1,12 +1,24 @@
-var obj = {
-    //原数据，包含字符串、对象、函数、数组等不同的类型
-    name: 'test',
-    main: {
-        a: 1,
-        b: 2,
+let obj = {
+    url: '/api/list',
+    method: 'GET',
+    cache: false,
+    timeout: 1000,
+    key: Symbol('KEY'),
+    big: 10n,
+    n: null,
+    u: undefined,
+    headers: {
+        'Content-Type': 'application/json',
+        post: {
+            'X-Token': 'xxx',
+        },
     },
-    fn: function () {},
-    friends: [1, 2, 3, [22, 33]],
+    arr: [10, 20, 30],
+    reg: /^\d+$/,
+    time: new Date(),
+    fn: function () {
+        console.log(this);
+    },
 };
 
 //循环递归实现深拷贝
