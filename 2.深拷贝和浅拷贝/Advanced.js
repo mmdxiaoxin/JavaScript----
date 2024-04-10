@@ -21,7 +21,12 @@ let obj = {
     },
 };
 
-//循环递归实现深拷贝
+/**
+ * 循环递归实现深拷贝
+ * @param {object} obj
+ * @param {WeakMap} hash
+ * @returns {object}
+ */
 function deepCopy(obj, hash = new WeakMap()) {
     if (obj === null) return obj;
     if (obj instanceof Date) return new Date(obj);
