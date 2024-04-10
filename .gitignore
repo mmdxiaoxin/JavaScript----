@@ -1,0 +1,22 @@
+# 忽略编译生成的文件
+build/
+dist/
+*.o
+*.exe
+
+# 忽略日志文件
+*.log
+
+# 忽略IDE或编辑器生成的临时文件
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 忽略特定类型的文件
+*.tmp
+*.bak
+*.DS_Store
+
+#test
+test/
