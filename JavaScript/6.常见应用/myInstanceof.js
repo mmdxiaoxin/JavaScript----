@@ -22,3 +22,12 @@ function myInstanceof(left, right) {
 
     return false;
 }
+/**
+ * 使用instanceof判断基本数据类型
+ */
+class PrimitiveNumber {
+    static [Symbol.hasInstance](x) {
+        return typeof x === 'number';
+    }
+}
+console.log(111 instanceof PrimitiveNumber); // true
