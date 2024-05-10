@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>使用Promise</title>
+    </head>
+    <body>
+        <div class="container">
+            <h2 class="page-header">Promise 初体验</h2>
+            <button class="btn btn-primary" id="btn">点击抽奖</button>
+        </div>
+        <script>
+            function rand(m, n) {
+                return Math.ceil(Math.random() * (n - m + 1)) + m - 1;
+            }
+            /**
+             * 点击后， 2s后显示是否中奖
+             */
+            const btn = document.querySelector('#btn');
+            btn.addEventListener('click', function () {
+                // setTimeout(() => {
+                //     let n = rand(1, 100);
+                //     if (n <= 30) {
+                //         alert('中奖');
+                //     } else {
+                //         alert('未中奖');
+                //     }
+                // }, 1000);
+                const p = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        let n = rand(1, 100);
+                        if (n <= 30) {
+                            resolve();
+                        } else {
+                            reject();
+                        }
+                    }, 1000);
+                });
+
+                p.then(
+                    () => {
+                        alert('中奖');
+                    },
+                    () => {
+                        alert('未中奖');
+                    },
+                );
+            });
+        </script>
+    </body>
+</html>
