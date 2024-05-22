@@ -1,5 +1,5 @@
 const promise1 = Promise.resolve(1);
-const promise2 = Promise.reject(2);
+const promise2 = Promise.resolve(2);
 const promise3 = Promise.resolve(3);
 
 Promise.all([promise1, promise2, promise3])
@@ -43,7 +43,51 @@ Promise.myAll = function (values) {
     });
 };
 
+/**
+ * 自定义Promise.all
+ * @param {Iterable} promises
+ */
+Promise.myAll1 = function (promises) {
+    return new Promise((resolve, reject) => {
+        if (!Array.isArray(promises)) {
+            const type = typeof promises;
+            return new TypeError(
+                `TypeError: ${type} ${promises} is not iterable`,
+            );
+        }
+        let resolvedCounter = 0;
+        const results = new Array(promises.length);
+
+        promises.forEach((promise, index) => {
+            Promise.resolve(promise)
+                .then((value) => {
+                    results[index] = value;
+                    resolvedCounter += 1;
+
+                    if (resolvedCounter === promises.length) {
+                        resolve(results);
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+
+        if (promises.length === 0) {
+            resolve([]);
+        }
+    });
+};
+
 Promise.myAll([promise1, promise2, promise3])
+    .then((values) => {
+        console.log('myAll:', values); // 输出: [1, 2, 3]
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+Promise.myAll1([promise1, promise2, promise3])
     .then((values) => {
         console.log('myAll:', values); // 输出: [1, 2, 3]
     })
