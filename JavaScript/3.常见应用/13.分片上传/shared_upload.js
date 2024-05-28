@@ -1,3 +1,5 @@
+import SparkMD5 from 'spark-md5';
+
 const inp = document.querySelector('input');
 inp.onchange = async (e) => {
     const file = inp.files[0];

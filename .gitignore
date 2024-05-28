@@ -18,5 +18,9 @@ dist/
 *.bak
 *.DS_Store
 
-#test
+# test
 test/
+
+# 忽略node模块
+node_modules/
+package-lock.json
