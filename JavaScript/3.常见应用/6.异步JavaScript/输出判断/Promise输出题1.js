@@ -16,3 +16,20 @@ Promise.resolve()
     .then(() => {
         console.log('promise3');
     });
+
+/**
+ * Promise.resolve().then(() => { console.log('resolvePromise resolved'); })
+ * () => { console.log('promise2'); }
+ * //console.log('promise1');
+ */
+
+/**
+ * () => { console.log('resolvePromise resolved'); }
+ * () => { console.log('promise3'); }
+ * //console.log('promise2');
+ */
+
+/**
+ * //console.log('resolvePromise resolved');
+ * //console.log('promise3');
+ */
