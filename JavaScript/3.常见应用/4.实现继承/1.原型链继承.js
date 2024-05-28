@@ -9,7 +9,7 @@ Parent.prototype.getName = function () {
 
 function Child() {}
 
-child.prototype = new Parent(); //继承
+Child.prototype = new Parent(); //继承
 
 let child1 = new Child();
 
