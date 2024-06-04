@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>停止和重新启动观察</title>
+    </head>
+    <body>
+        <div id="targetNode">
+            <p>Initial content</p>
+        </div>
+        <button id="addElement">Add Element</button>
+        <button id="toggleObserver">Stop/Start Observer</button>
+        <script>
+            const targetNode =
+                document.getElementById('targetNode');
+            const addElementButton =
+                document.getElementById('addElement');
+            const toggleObserverButton =
+                document.getElementById('toggleObserver');
+
+            let isObserving = true;
+
+            // Configuration for the observer (which mutations to observe)
+            const config = { childList: true };
+
+            // Callback function to execute when mutations are observed
+            const callback = function (mutationsList, observer) {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        console.log(
+                            'A child node has been added or removed.',
+                        );
+                    }
+                }
+            };
+
+            // Create an instance of MutationObserver with the callback
+            const observer = new MutationObserver(callback);
+
+            // Start observing the target node for configured mutations
+            observer.observe(targetNode, config);
+
+            // Add a new element when the button is clicked
+            addElementButton.addEventListener('click', () => {
+                const newElement = document.createElement('p');
+                newElement.textContent = 'New content';
+                targetNode.appendChild(newElement);
+            });
+
+            // Stop or restart observing when the button is clicked
+            toggleObserverButton.addEventListener(
+                'click',
+                () => {
+                    if (isObserving) {
+                        observer.disconnect();
+                        console.log('Observer stopped.');
+                    } else {
+                        observer.observe(targetNode, config);
+                        console.log('Observer started.');
+                    }
+                    isObserving = !isObserving;
+                },
+            );
+        </script>
+    </body>
+</html>

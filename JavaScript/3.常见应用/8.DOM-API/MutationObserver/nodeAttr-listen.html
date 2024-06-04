@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>监控属性变化</title>
+    </head>
+    <body>
+        <div id="targetNode">
+            <p>Initial content</p>
+        </div>
+        <button id="changeAttribute">Change Attribute</button>
+        <script>
+            const targetNode =
+                document.getElementById('targetNode');
+            const button = document.getElementById(
+                'changeAttribute',
+            );
+
+            // Configuration for the observer (which mutations to observe)
+            const config = { attributes: true };
+
+            // Callback function to execute when mutations are observed
+            const callback = function (mutationsList, observer) {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'attributes') {
+                        console.log(
+                            `The ${mutation.attributeName} attribute was modified.`,
+                        );
+                    }
+                }
+            };
+
+            // Create an instance of MutationObserver with the callback
+            const observer = new MutationObserver(callback);
+
+            // Start observing the target node for configured mutations
+            observer.observe(targetNode, config);
+
+            // Change an attribute when the button is clicked
+            button.addEventListener('click', () => {
+                targetNode.setAttribute(
+                    'data-example',
+                    'newValue',
+                );
+            });
+        </script>
+    </body>
+</html>
