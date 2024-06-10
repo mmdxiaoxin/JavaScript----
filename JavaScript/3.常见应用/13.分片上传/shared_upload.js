@@ -11,6 +11,11 @@ inp.onchange = async (e) => {
     console.log(result);
 };
 
+/**
+ * 增量hash
+ * @param {Array<Blob>} chunks
+ * @return {Promise}
+ */
 function hash(chunks) {
     return new Promise((resolve) => {
         const spark = new SparkMD5();
@@ -33,7 +38,7 @@ function hash(chunks) {
 }
 
 /**
- *
+ * 文件分片
  * @param {File} file
  * @param {number} chunkSize
  * @return {Array<Blob>}
