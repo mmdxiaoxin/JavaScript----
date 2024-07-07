@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Example</title>
+        <!-- CSS文件会被预解析线程提前下载 -->
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <!-- 图片资源会被预解析线程提前下载 -->
+        <img src="image.jpg" alt="Example Image" />
+
+        <!-- 同步JavaScript脚本，预解析线程提前下载，但主线程会阻塞HTML解析 -->
+        <script src="script1.js"></script>
+
+        <!-- 异步JavaScript脚本，预解析线程提前下载，下载完成后立即执行 -->
+        <script src="script2.js" async></script>
+
+        <!-- 延迟JavaScript脚本，预解析线程提前下载，HTML解析完毕后执行 -->
+        <script src="script3.js" defer></script>
+
+        <p>Some content here...</p>
+    </body>
+</html>
